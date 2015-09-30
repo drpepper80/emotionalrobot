@@ -24,14 +24,10 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-<<<<<<< HEAD
-    private List<NodeRedMessage> mDataFeed;
+    private List<NodeRedMessage> mDataFeed = new ArrayList<>();
+
     private TextView mAllIcon;
     private TextView mHappyIcon;
-=======
-    private List<NodeRedMessage> mDataFeed = new ArrayList<>();
->>>>>>> 4ab50efd37d9b864e658585bb6d8c5990f2f3e86
-
     private Switch mMoodSwitch;
     private IFeedProvider mFeedProvider = new FeedProvider();
 
