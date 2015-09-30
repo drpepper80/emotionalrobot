@@ -9,14 +9,14 @@ import java.util.ArrayList;
  */
 public class NodeRedSentiment implements NodeRedMessageComponent {
 
-    private int score;
-    private int comparative;
+    private float score;
+    private float comparative;
     private ArrayList<String> tokens;
     private ArrayList<String> words;
     private ArrayList<String> positiveWords;
     private ArrayList<String> negativeWords;
 
-    public NodeRedSentiment(int score, int comparative, ArrayList<String> tokens,
+    public NodeRedSentiment(float score, float comparative, ArrayList<String> tokens,
                             ArrayList<String> words, ArrayList<String> positiveWords,
                             ArrayList<String> negativeWords) {
         this.score = score;
@@ -28,27 +28,25 @@ public class NodeRedSentiment implements NodeRedMessageComponent {
     }
 
     public NodeRedSentiment() {
-        score = 0;
-        comparative = 0;
         tokens = new ArrayList<>();
         words = new ArrayList<>();
         positiveWords = new ArrayList<>();
         negativeWords = new ArrayList<>();
     }
 
-    public int getScore() {
+    public float getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(float score) {
         this.score = score;
     }
 
-    public int getComparative() {
+    public float getComparative() {
         return comparative;
     }
 
-    public void setComparative(int comparative) {
+    public void setComparative(float comparative) {
         this.comparative = comparative;
     }
 

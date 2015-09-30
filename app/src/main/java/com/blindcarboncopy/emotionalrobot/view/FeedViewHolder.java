@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blindcarboncopy.emotionalrobot.R;
@@ -16,16 +17,15 @@ public class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     public TextView title;
     public TextView payload;
-
+    public RelativeLayout feedRelativeLayout;
     public Context context;
     public String url;
 
     public FeedViewHolder(View itemView) {
         super(itemView);
-
+        feedRelativeLayout = (RelativeLayout) itemView.findViewById(R.id.feed_row_relative_layout);
         title = (TextView) itemView.findViewById(R.id.article_title);
         payload = (TextView) itemView.findViewById(R.id.article_payload);
-
         itemView.setOnClickListener(this);
     }
 

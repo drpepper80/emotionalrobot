@@ -3,6 +3,10 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
+    packagingOptions {
+        exclude("META-INF/LICENSE.txt")
+        exclude("META-INF/NOTICE.txt")
+    }
 
     defaultConfig {
         applicationId "com.blindcarboncopy.emotionalrobot"
@@ -26,4 +30,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.0.1'
     compile 'com.neovisionaries:nv-websocket-client:1.10'
     compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'org.apache.commons:commons-lang3:3.0'
+
 }
