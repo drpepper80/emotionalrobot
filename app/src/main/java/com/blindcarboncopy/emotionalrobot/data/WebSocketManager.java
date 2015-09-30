@@ -21,20 +21,11 @@ import de.greenrobot.event.EventBus;
 public class WebSocketManager {
 
     private static String TAG = WebSocketManager.class.getName();
-
-    private static String HAPPY_URL = "ws://emo-node.eu-gb.mybluemix.net/ws/happy";
     private static String ALL_URL = "ws://emo-node.eu-gb.mybluemix.net/ws/all";
 
     private WebSocket mWebSocket;
 
     public WebSocketManager() {
-    }
-
-    public void switchToHappyFeed() {
-        stopListening();
-        Log.d(TAG, "Switching to HAPPY feed.");
-        startListening(HAPPY_URL);
-        Log.d(TAG, "Switched to HAPPY feed.");
     }
 
     public void switchToAllFeed() {
@@ -78,7 +69,6 @@ public class WebSocketManager {
         Gson gson = new Gson();
         NodeRedMessage message = gson.fromJson(text, NodeRedMessage.class);
 
-        NodeRedMessageEvent messageEvent = new NodeRedMessageEvent(message);
-        EventBus.getDefault().post(messageEvent);
+        EventBus.getDefault().post(new NodeRedMessageEvent(message));
     }
 }
