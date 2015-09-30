@@ -16,6 +16,17 @@ public class NodeRedSentiment implements NodeRedMessageComponent {
     private ArrayList<String> positiveWords;
     private ArrayList<String> negativeWords;
 
+    public NodeRedSentiment(int score, int comparative, ArrayList<String> tokens,
+                            ArrayList<String> words, ArrayList<String> positiveWords,
+                            ArrayList<String> negativeWords) {
+        this.score = score;
+        this.comparative = comparative;
+        this.tokens = tokens;
+        this.words = words;
+        this.positiveWords = positiveWords;
+        this.negativeWords = negativeWords;
+    }
+
     public NodeRedSentiment() {
         score = 0;
         comparative = 0;

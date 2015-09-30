@@ -23,20 +23,16 @@ public class NodeRedMessage {
     private String topic;
     private String payload;
     private String msgid;
-    private HashSet<NodeRedMessageComponent> componentSet;
+    private Set<NodeRedMessageComponent> componentSet;
 
     public NodeRedMessage() {
-        this.topic = topic;
-        this.payload = payload;
-        this.msgid = msgid;
-        componentSet = new HashSet();
     }
 
     public NodeRedMessage(String topic, String payload, String msgid) {
         this.topic = topic;
         this.payload = payload;
         this.msgid = msgid;
-        componentSet = new HashSet();
+        componentSet = new HashSet<>();
     }
 
 
