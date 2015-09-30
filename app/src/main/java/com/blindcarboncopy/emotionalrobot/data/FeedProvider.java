@@ -16,7 +16,7 @@ import de.greenrobot.event.EventBus;
 public class FeedProvider implements IFeedProvider {
 
     private List<NodeRedMessage> mMessagesCache;
-    private WebSocketManager mWebSocketManager;
+    private IWebSocketManager mWebSocketManager;
 
     private final Object syncLock = new Object();
 
@@ -25,7 +25,7 @@ public class FeedProvider implements IFeedProvider {
 
         mMessagesCache = new ArrayList<>();
         mWebSocketManager = new WebSocketManager();
-        mWebSocketManager.switchToAllFeed();
+        mWebSocketManager.startListening();
     }
 
     @Override
