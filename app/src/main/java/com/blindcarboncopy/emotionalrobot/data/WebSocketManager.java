@@ -1,6 +1,7 @@
 package com.blindcarboncopy.emotionalrobot.data;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.blindcarboncopy.emotionalrobot.event.NodeRedMessageEvent;
 import com.blindcarboncopy.emotionalrobot.model.NodeRedMessage;
@@ -19,28 +20,58 @@ import de.greenrobot.event.EventBus;
  */
 public class WebSocketManager {
 
+    private static String TAG = WebSocketManager.class.getName();
+
+    private static String HAPPY_URL = "ws://emo-node.eu-gb.mybluemix.net/ws/happy";
+    private static String ALL_URL = "ws://emo-node.eu-gb.mybluemix.net/ws/all";
+
+    private WebSocket mWebSocket;
+
+    public WebSocketManager() {
+    }
+
+    public void switchToHappyFeed() {
+        stopListening();
+        Log.d(TAG, "Switching to HAPPY feed.");
+        startListening(HAPPY_URL);
+        Log.d(TAG, "Switched to HAPPY feed.");
+    }
+
+    public void switchToAllFeed() {
+        stopListening();
+        Log.d(TAG, "Switching to ALL feed.");
+        startListening(ALL_URL);
+        Log.d(TAG, "Switched to ALL feed.");
+    }
+
     /**
      * Starts listening for messages on a remote web socket.
      */
-    public void startListening() {
+    private void startListening(final String feedUrl) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    WebSocket webSocket = new WebSocketFactory().createSocket("ws://emo-node.eu-gb.mybluemix.net/ws/happy");
-                    webSocket.addListener(new WebSocketAdapter() {
+                    mWebSocket = new WebSocketFactory().createSocket(feedUrl);
+                    mWebSocket.addListener(new WebSocketAdapter() {
                         @Override
                         public void onTextMessage(WebSocket websocket, final String text) throws Exception {
                             notifyTextMessage(text);
                         }
                     });
 
-                    webSocket.connect();
+                    mWebSocket.connect();
                 } catch (IOException | WebSocketException e) {
                     e.printStackTrace();
                 }
             }
         });
+    }
+
+    private void stopListening() {
+        if (mWebSocket != null) {
+            mWebSocket.disconnect();
+        }
     }
 
     private void notifyTextMessage(String text) {
@@ -49,12 +80,5 @@ public class WebSocketManager {
 
         NodeRedMessageEvent messageEvent = new NodeRedMessageEvent(message);
         EventBus.getDefault().post(messageEvent);
-    }
-
-    /**
-     * Stops listening for messages on a remote web socket.
-     */
-    public void stopListening() {
-
     }
 }

@@ -23,13 +23,16 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     private RecyclerView.Adapter mAdapter;
     private List<NodeRedMessage> mDataFeed;
 
+    Switch mMoodSwitch;
+    WebSocketManager mWebSocketManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         EventBus.getDefault().register(this);
 
-        Switch mMoodSwitch = (Switch) findViewById(R.id.mood_switch);
+        mMoodSwitch = (Switch) findViewById(R.id.mood_switch);
         mMoodSwitch.setOnCheckedChangeListener(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.feed);
@@ -43,7 +46,11 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        buttonView.setText(isChecked ? R.string.happy_label : R.string.sad_label);
+        if (isChecked) {
+            mWebSocketManager.switchToHappyFeed();
+        } else {
+            mWebSocketManager.switchToAllFeed();
+        }
     }
 
     public void onEvent(final NodeRedMessageEvent messageEvent) {
@@ -57,11 +64,11 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     }
 
     void initialiseFeed() {
-        WebSocketManager mWebSocketManager = new WebSocketManager();
+        mWebSocketManager = new WebSocketManager();
         mDataFeed = new ArrayList<>();
         mAdapter = new FeedAdapter(mDataFeed, this);
         mRecyclerView.setAdapter(mAdapter);
 
-        mWebSocketManager.startListening();
+        mWebSocketManager.switchToAllFeed();
     }
 }
