@@ -18,7 +18,6 @@ public class NodeRedArticle implements NodeRedMessageComponent {
     private String author;
     private String comments;
     private String origlink;
-    private String origlink;
 
 
 
