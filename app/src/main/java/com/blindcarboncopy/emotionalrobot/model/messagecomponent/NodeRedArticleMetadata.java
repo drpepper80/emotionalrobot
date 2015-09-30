@@ -2,8 +2,6 @@ package com.blindcarboncopy.emotionalrobot.model.messagecomponent;
 
 import com.blindcarboncopy.emotionalrobot.model.interfaces.NodeRedMessageComponent;
 
-import java.util.List;
-
 /**
  * Created by chris on 30/09/2015.
  */
@@ -23,9 +21,10 @@ public class NodeRedArticleMetadata implements NodeRedMessageComponent {
     private String language;
     private String favicon;
     private String copyright;
-    private NodeRedArticleMetadataImage articleMetadataImage;
+    private NodeRedArticleMetadataImage image;
 
     public NodeRedArticleMetadata() {
+        image = new NodeRedArticleMetadataImage();
     }
 
     public String getType() {
@@ -140,11 +139,11 @@ public class NodeRedArticleMetadata implements NodeRedMessageComponent {
         this.copyright = copyright;
     }
 
-    public NodeRedArticleMetadataImage getArticleMetadataImage() {
-        return articleMetadataImage;
+    public NodeRedArticleMetadataImage getImage() {
+        return image;
     }
 
-    public void setArticleMetadataImage(NodeRedArticleMetadataImage articleMetadataImage) {
-        this.articleMetadataImage = articleMetadataImage;
+    public void setImage(NodeRedArticleMetadataImage image) {
+        this.image = image;
     }
 }

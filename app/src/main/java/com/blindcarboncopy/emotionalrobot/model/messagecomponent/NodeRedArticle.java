@@ -22,7 +22,7 @@ public class NodeRedArticle implements NodeRedMessageComponent {
     private String origlink;
     private List categories;
     private List enclosures;
-    private NodeRedArticleMetadata nodeRedArticleMetadata;
+    private NodeRedArticleMetadata metadata;
 
     public NodeRedArticle(String title, String description, String summary, String date,
                           String pubdate, String pubDate, String link, String guid, String author,
@@ -41,10 +41,11 @@ public class NodeRedArticle implements NodeRedMessageComponent {
         this.origlink = origlink;
         this.categories = categories;
         this.enclosures = enclosures;
-        this.nodeRedArticleMetadata = nodeRedArticleMetadata;
+        this.metadata = nodeRedArticleMetadata;
     }
 
     public NodeRedArticle() {
+        metadata = new NodeRedArticleMetadata();
     }
 
     public String getTitle() {
@@ -151,11 +152,11 @@ public class NodeRedArticle implements NodeRedMessageComponent {
         this.enclosures = enclosures;
     }
 
-    public NodeRedArticleMetadata getNodeRedArticleMetadata() {
-        return nodeRedArticleMetadata;
+    public NodeRedArticleMetadata getMetadata() {
+        return metadata;
     }
 
-    public void setNodeRedArticleMetadata(NodeRedArticleMetadata nodeRedArticleMetadata) {
-        this.nodeRedArticleMetadata = nodeRedArticleMetadata;
+    public void setMetadata(NodeRedArticleMetadata metadata) {
+        this.metadata = metadata;
     }
 }

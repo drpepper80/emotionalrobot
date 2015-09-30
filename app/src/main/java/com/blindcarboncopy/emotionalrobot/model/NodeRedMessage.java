@@ -2,6 +2,8 @@ package com.blindcarboncopy.emotionalrobot.model;
 
 
 import com.blindcarboncopy.emotionalrobot.model.interfaces.NodeRedMessageComponent;
+import com.blindcarboncopy.emotionalrobot.model.messagecomponent.NodeRedArticle;
+import com.blindcarboncopy.emotionalrobot.model.messagecomponent.NodeRedSentiment;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,10 +14,10 @@ import java.util.Set;
  * Topic - String
  * Payload -String
  * MsgId - String
- *
+ * <p/>
  * Can also optionally have additional other message objects
  * nested within.
- *
+ * <p/>
  * We only need Article and Sentiment for this project.
  */
 public class NodeRedMessage {
@@ -23,18 +25,36 @@ public class NodeRedMessage {
     private String topic;
     private String payload;
     private String msgid;
-    private Set<NodeRedMessageComponent> componentSet;
+
+    private NodeRedArticle article;
+    private NodeRedSentiment sentiment;
 
     public NodeRedMessage() {
+        article = new NodeRedArticle();
+        sentiment = new NodeRedSentiment();
     }
 
     public NodeRedMessage(String topic, String payload, String msgid) {
         this.topic = topic;
         this.payload = payload;
         this.msgid = msgid;
-        componentSet = new HashSet<>();
     }
 
+    public NodeRedArticle getArticle() {
+        return article;
+    }
+
+    public void setArticle(NodeRedArticle article) {
+        this.article = article;
+    }
+
+    public NodeRedSentiment getSentiment() {
+        return sentiment;
+    }
+
+    public void setSentiment(NodeRedSentiment sentiment) {
+        this.sentiment = sentiment;
+    }
 
     public String getTopic() {
         return topic;
@@ -58,14 +78,6 @@ public class NodeRedMessage {
 
     public void setMsgid(String msgid) {
         this.msgid = msgid;
-    }
-
-    public Set getComponentSet() {
-        return componentSet;
-    }
-
-    public void setComponentSet(HashSet<NodeRedMessageComponent> componentSet) {
-        this.componentSet = componentSet;
     }
 }
 

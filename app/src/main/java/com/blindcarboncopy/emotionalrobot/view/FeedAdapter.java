@@ -38,9 +38,9 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         FeedViewHolder feedViewHolder = (FeedViewHolder) viewHolder;
         feedViewHolder.context = mContext;
-        feedViewHolder.title.setText(message.getTopic());
+        feedViewHolder.title.setText(message.getArticle().getTitle());
         feedViewHolder.payload.setText(message.getPayload());
-        feedViewHolder.url = message.getTopic();
+        feedViewHolder.url = message.getArticle().getLink();
     }
 
     @Override
