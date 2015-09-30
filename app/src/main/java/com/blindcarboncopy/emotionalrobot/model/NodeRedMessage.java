@@ -1,12 +1,8 @@
 package com.blindcarboncopy.emotionalrobot.model;
 
 
-import com.blindcarboncopy.emotionalrobot.model.interfaces.NodeRedMessageComponent;
 import com.blindcarboncopy.emotionalrobot.model.messagecomponent.NodeRedArticle;
 import com.blindcarboncopy.emotionalrobot.model.messagecomponent.NodeRedSentiment;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A data model for the Node Red Message object
@@ -24,7 +20,7 @@ public class NodeRedMessage {
 
     private String topic;
     private String payload;
-    private String msgid;
+    private String _msgid;
 
     private NodeRedArticle article;
     private NodeRedSentiment sentiment;
@@ -37,7 +33,7 @@ public class NodeRedMessage {
     public NodeRedMessage(String topic, String payload, String msgid) {
         this.topic = topic;
         this.payload = payload;
-        this.msgid = msgid;
+        this._msgid = msgid;
     }
 
     public NodeRedArticle getArticle() {
@@ -72,12 +68,12 @@ public class NodeRedMessage {
         this.payload = payload;
     }
 
-    public String getMsgid() {
-        return msgid;
+    public String get_msgid() {
+        return _msgid;
     }
 
-    public void setMsgid(String msgid) {
-        this.msgid = msgid;
+    public void set_msgid(String _msgid) {
+        this._msgid = _msgid;
     }
 }
 

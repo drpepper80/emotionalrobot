@@ -5,7 +5,7 @@ import com.blindcarboncopy.emotionalrobot.model.interfaces.NodeRedMessageCompone
 import java.util.List;
 
 /**
- * Created by chris on 30/09/2015.
+ * A Model to represent the Article  message component
  */
 public class NodeRedArticle implements NodeRedMessageComponent {
 

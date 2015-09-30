@@ -1,7 +1,7 @@
 package com.blindcarboncopy.emotionalrobot.model.messagecomponent;
 
 /**
- * Created by chris on 30/09/2015.
+ * A Model to represent the Article Metadata Image message component
  */
 public class NodeRedArticleMetadataImage {
 

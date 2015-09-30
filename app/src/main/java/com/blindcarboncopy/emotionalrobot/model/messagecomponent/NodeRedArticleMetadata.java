@@ -3,7 +3,7 @@ package com.blindcarboncopy.emotionalrobot.model.messagecomponent;
 import com.blindcarboncopy.emotionalrobot.model.interfaces.NodeRedMessageComponent;
 
 /**
- * Created by chris on 30/09/2015.
+ * A Model to represent the Article Metadata message component
  */
 public class NodeRedArticleMetadata implements NodeRedMessageComponent {
 
