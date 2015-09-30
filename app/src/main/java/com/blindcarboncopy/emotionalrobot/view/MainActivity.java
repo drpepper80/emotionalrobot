@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.blindcarboncopy.emotionalrobot.R;
 import com.blindcarboncopy.emotionalrobot.data.WebSocketManager;
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private List<NodeRedMessage> mDataFeed;
+    private TextView mAllIcon;
+    private TextView mHappyIcon;
 
     Switch mMoodSwitch;
     WebSocketManager mWebSocketManager;
@@ -31,6 +35,23 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         EventBus.getDefault().register(this);
+
+        mAllIcon = (TextView) findViewById(R.id.all_label);
+        mHappyIcon = (TextView) findViewById(R.id.happy_label);
+
+        mHappyIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMoodSwitch.setChecked(true);
+            }
+        });
+
+        mAllIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMoodSwitch.setChecked(false);
+            }
+        });
 
         mMoodSwitch = (Switch) findViewById(R.id.mood_switch);
         mMoodSwitch.setOnCheckedChangeListener(this);
