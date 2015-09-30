@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Emotional Robot</string>
+    <string name="happy_label">Happy</string>
+    <string name="sad_label">Sad</string>
+</resources>
