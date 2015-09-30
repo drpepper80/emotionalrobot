@@ -10,8 +10,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.blindcarboncopy.emotionalrobot.R;
-import com.blindcarboncopy.emotionalrobot.data.WebSocketManager;
-import com.blindcarboncopy.emotionalrobot.event.NodeRedMessageEvent;
+import com.blindcarboncopy.emotionalrobot.data.FeedProvider;
+import com.blindcarboncopy.emotionalrobot.data.IFeedProvider;
+import com.blindcarboncopy.emotionalrobot.event.FeedUpdatedEvent;
 import com.blindcarboncopy.emotionalrobot.model.NodeRedMessage;
 
 import java.util.ArrayList;
@@ -23,12 +24,16 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
+<<<<<<< HEAD
     private List<NodeRedMessage> mDataFeed;
     private TextView mAllIcon;
     private TextView mHappyIcon;
+=======
+    private List<NodeRedMessage> mDataFeed = new ArrayList<>();
+>>>>>>> 4ab50efd37d9b864e658585bb6d8c5990f2f3e86
 
-    Switch mMoodSwitch;
-    WebSocketManager mWebSocketManager;
+    private Switch mMoodSwitch;
+    private IFeedProvider mFeedProvider = new FeedProvider();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,29 +72,37 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked) {
-            mWebSocketManager.switchToHappyFeed();
-        } else {
-            mWebSocketManager.switchToAllFeed();
-        }
+        refreshFeed(isChecked);
     }
 
-    public void onEvent(final NodeRedMessageEvent messageEvent) {
+    public void onEvent(FeedUpdatedEvent feedUpdatedEvent) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mDataFeed.add(0, messageEvent.message);
-                mAdapter.notifyDataSetChanged();
+                refreshFeed(mMoodSwitch.isChecked());
             }
         });
     }
 
+    /**
+     * Does the initial setup of the feed and populates it.
+     */
     void initialiseFeed() {
-        mWebSocketManager = new WebSocketManager();
-        mDataFeed = new ArrayList<>();
         mAdapter = new FeedAdapter(mDataFeed, this);
         mRecyclerView.setAdapter(mAdapter);
 
-        mWebSocketManager.switchToAllFeed();
+        refreshFeed(mMoodSwitch.isChecked());
+    }
+
+    /**
+     * Fetches message data from the FeedProvider and refreshes the list.
+     *
+     * @param showOnlyHappy If true, only feed data considered to be "happy" will be returned.
+     */
+    void refreshFeed(final boolean showOnlyHappy) {
+        mDataFeed.clear();
+        mDataFeed.addAll(mFeedProvider.getMessages(showOnlyHappy));
+
+        mAdapter.notifyDataSetChanged();
     }
 }

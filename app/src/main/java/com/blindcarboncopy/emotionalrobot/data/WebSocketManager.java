@@ -1,7 +1,6 @@
 package com.blindcarboncopy.emotionalrobot.data;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.blindcarboncopy.emotionalrobot.event.NodeRedMessageEvent;
 import com.blindcarboncopy.emotionalrobot.model.NodeRedMessage;
@@ -10,6 +9,7 @@ import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketException;
 import com.neovisionaries.ws.client.WebSocketFactory;
+import com.neovisionaries.ws.client.WebSocketFrame;
 
 import java.io.IOException;
 
@@ -18,36 +18,29 @@ import de.greenrobot.event.EventBus;
 /**
  * Handles all web socket interactions with the NodeRed server.
  */
-public class WebSocketManager {
-
-    private static String TAG = WebSocketManager.class.getName();
-
-    private static String HAPPY_URL = "ws://emo-node.eu-gb.mybluemix.net/ws/happy";
-    private static String ALL_URL = "ws://emo-node.eu-gb.mybluemix.net/ws/all";
+public class WebSocketManager implements IWebSocketManager {
 
     private WebSocket mWebSocket;
 
-    public WebSocketManager() {
+    @Override
+    public void startListening() {
+        stopListening();
+        startListening("ws://emo-node.eu-gb.mybluemix.net/ws/all");
     }
 
-    public void switchToHappyFeed() {
-        stopListening();
-        Log.d(TAG, "Switching to HAPPY feed.");
-        startListening(HAPPY_URL);
-        Log.d(TAG, "Switched to HAPPY feed.");
-    }
-
-    public void switchToAllFeed() {
-        stopListening();
-        Log.d(TAG, "Switching to ALL feed.");
-        startListening(ALL_URL);
-        Log.d(TAG, "Switched to ALL feed.");
+    @Override
+    public void stopListening() {
+        if (mWebSocket != null && mWebSocket.isOpen()) {
+            mWebSocket.disconnect();
+        }
     }
 
     /**
      * Starts listening for messages on a remote web socket.
      */
     private void startListening(final String feedUrl) {
+        stopListening();
+
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -57,6 +50,13 @@ public class WebSocketManager {
                         @Override
                         public void onTextMessage(WebSocket websocket, final String text) throws Exception {
                             notifyTextMessage(text);
+                        }
+
+                        @Override
+                        public void onDisconnected(WebSocket websocket,
+                                                   WebSocketFrame serverCloseFrame, WebSocketFrame clientCloseFrame,
+                                                   boolean closedByServer) throws Exception {
+                            resetConnection();
                         }
                     });
 
@@ -68,17 +68,14 @@ public class WebSocketManager {
         });
     }
 
-    private void stopListening() {
-        if (mWebSocket != null) {
-            mWebSocket.disconnect();
-        }
-    }
-
     private void notifyTextMessage(String text) {
         Gson gson = new Gson();
         NodeRedMessage message = gson.fromJson(text, NodeRedMessage.class);
 
-        NodeRedMessageEvent messageEvent = new NodeRedMessageEvent(message);
-        EventBus.getDefault().post(messageEvent);
+        EventBus.getDefault().post(new NodeRedMessageEvent(message));
+    }
+
+    private void resetConnection() {
+        startListening();
     }
 }
