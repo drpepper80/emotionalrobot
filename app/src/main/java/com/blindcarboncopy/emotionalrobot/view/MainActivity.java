@@ -1,32 +1,34 @@
 package com.blindcarboncopy.emotionalrobot.view;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.blindcarboncopy.emotionalrobot.R;
+import com.blindcarboncopy.emotionalrobot.data.WebSocketManager;
+import com.blindcarboncopy.emotionalrobot.event.NodeRedMessageEvent;
 import com.blindcarboncopy.emotionalrobot.model.NodeRedMessage;
-import com.google.gson.Gson;
-import com.neovisionaries.ws.client.WebSocket;
-import com.neovisionaries.ws.client.WebSocketAdapter;
-import com.neovisionaries.ws.client.WebSocketException;
-import com.neovisionaries.ws.client.WebSocketFactory;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
+    private WebSocketManager mWebSocketManager;
+    private List<NodeRedMessage> mDataFeed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        EventBus.getDefault().register(this);
+
+        mWebSocketManager = new WebSocketManager();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.feed);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -37,38 +39,21 @@ public class MainActivity extends AppCompatActivity {
         initialiseFeed();
     }
 
-    void initialiseFeed() {
-
-        final List<NodeRedMessage> nodeRedMessages = new ArrayList<>();
-
-        AsyncTask.execute(new Runnable() {
+    public void onEvent(final NodeRedMessageEvent messageEvent) {
+        runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    WebSocket webSocket = new WebSocketFactory().createSocket("ws://emo-node.eu-gb.mybluemix.net/ws/happy");
-                    webSocket.addListener(new WebSocketAdapter() {
-                        @Override
-                        public void onTextMessage(WebSocket websocket, final String text) throws Exception {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Gson gson = new Gson();
-                                    NodeRedMessage message = gson.fromJson(text, NodeRedMessage.class);
-                                    nodeRedMessages.add(0, message);
-                                    mAdapter.notifyDataSetChanged();
-                                }
-                            });
-                        }
-                    });
-
-                    webSocket.connect();
-                } catch (IOException | WebSocketException e) {
-                    e.printStackTrace();
-                }
+                mDataFeed.add(0, messageEvent.message);
+                mAdapter.notifyDataSetChanged();
             }
         });
+    }
 
-        mAdapter = new FeedAdapter(nodeRedMessages, this);
+    void initialiseFeed() {
+        mDataFeed = new ArrayList<>();
+        mAdapter = new FeedAdapter(mDataFeed, this);
         mRecyclerView.setAdapter(mAdapter);
+
+        mWebSocketManager.startListening();
     }
 }
