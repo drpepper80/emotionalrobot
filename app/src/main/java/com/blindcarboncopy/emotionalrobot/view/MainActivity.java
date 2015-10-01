@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.blindcarboncopy.emotionalrobot.R;
 import com.blindcarboncopy.emotionalrobot.data.FeedProvider;
 import com.blindcarboncopy.emotionalrobot.data.IFeedProvider;
+import com.blindcarboncopy.emotionalrobot.data.RESTClient;
 import com.blindcarboncopy.emotionalrobot.data.WebSocketManager;
 import com.blindcarboncopy.emotionalrobot.event.FeedUpdatedEvent;
 import com.blindcarboncopy.emotionalrobot.model.nodered.NodeRedMessage;
@@ -25,19 +26,21 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private final List<NodeRedMessage> mDataFeed = new ArrayList<>();
-
+    private List<NodeRedMessage> mDataFeed;
     private TextView mAllIcon;
     private TextView mHappyIcon;
     private Switch mMoodSwitch;
-    private final IFeedProvider mFeedProvider = new FeedProvider(new WebSocketManager());
+    private IFeedProvider mFeedProvider;
+    private RESTClient restClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         EventBus.getDefault().register(this);
-
+        mDataFeed = new ArrayList<>();
+        restClient = new RESTClient();
+        mFeedProvider = new FeedProvider(new WebSocketManager());
         mAllIcon = (TextView) findViewById(R.id.all_label);
         mHappyIcon = (TextView) findViewById(R.id.happy_label);
 
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
+
         initialiseFeed();
     }
 
@@ -86,8 +90,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     private void initialiseFeed() {
         mAdapter = new FeedAdapter(mDataFeed, this);
         mRecyclerView.setAdapter(mAdapter);
-
-        refreshFeed(mMoodSwitch.isChecked());
+        restClient.getAllMessages();
     }
 
     /**

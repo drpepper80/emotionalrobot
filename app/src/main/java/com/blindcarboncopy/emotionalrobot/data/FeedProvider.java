@@ -1,7 +1,9 @@
 package com.blindcarboncopy.emotionalrobot.data;
 
+import com.blindcarboncopy.emotionalrobot.event.CloudantMessagesEvent;
 import com.blindcarboncopy.emotionalrobot.event.FeedUpdatedEvent;
 import com.blindcarboncopy.emotionalrobot.event.NodeRedMessageEvent;
+import com.blindcarboncopy.emotionalrobot.model.cloudant.messages.CloudantMessageRecord;
 import com.blindcarboncopy.emotionalrobot.model.nodered.NodeRedMessage;
 
 import java.util.ArrayList;
@@ -48,6 +50,22 @@ public class FeedProvider implements IFeedProvider {
     public void onEvent(final NodeRedMessageEvent messageEvent) {
         synchronized (syncLock) {
             mMessagesCache.add(messageEvent.message);
+            EventBus.getDefault().post(new FeedUpdatedEvent());
+        }
+    }
+
+    /**
+     * Event handler for when a new CloudantMessagesEvent is received from the server.
+     *
+     * @param messageEvent The received message event.
+     */
+    public void onEvent(final CloudantMessagesEvent messageEvent) {
+        synchronized (syncLock) {
+            for(CloudantMessageRecord cloudantMessageRecord:  messageEvent.messages)
+            {
+                mMessagesCache.add(cloudantMessageRecord.getDoc());
+            }
+
             EventBus.getDefault().post(new FeedUpdatedEvent());
         }
     }
