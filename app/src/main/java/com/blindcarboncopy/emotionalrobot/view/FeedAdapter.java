@@ -3,6 +3,7 @@ package com.blindcarboncopy.emotionalrobot.view;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         int sentimentScore = Math.round(message.getSentiment().getScore());
         feedViewHolder.context = mContext;
         feedViewHolder.title.setText(message.getArticle().getTitle());
-        feedViewHolder.payload.setText(StringUtils.abbreviate(message.getPayload(), 120));
+        feedViewHolder.payload.setText(Html.fromHtml(StringUtils.abbreviate(message.getPayload(), 120)));
         feedViewHolder.url = message.getArticle().getLink();
 
         // A neutral message
