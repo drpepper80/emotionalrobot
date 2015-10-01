@@ -1,9 +1,9 @@
 package com.blindcarboncopy.emotionalrobot.data;
 
 /**
- * Defines behaviour for handling WebSockets.
+ * Defines behaviour for handling remote feed connections.
  */
-public interface IWebSocketManager {
+public interface IConnectionManager {
     void startListening();
     void stopListening();
 }

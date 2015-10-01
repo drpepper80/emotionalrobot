@@ -18,7 +18,7 @@ import de.greenrobot.event.EventBus;
 /**
  * Handles all web socket interactions with the NodeRed server.
  */
-public class WebSocketManager implements IWebSocketManager {
+public class WebSocketManager implements IConnectionManager {
 
     private WebSocket mWebSocket;
 

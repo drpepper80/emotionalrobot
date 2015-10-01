@@ -16,17 +16,17 @@ import de.greenrobot.event.EventBus;
 public class FeedProvider implements IFeedProvider {
 
     private List<NodeRedMessage> mMessagesCache;
-    private IWebSocketManager mWebSocketManager;
+    private IConnectionManager connectionManager;
 
     private final Object syncLock = new Object();
 
-    public FeedProvider(IWebSocketManager webSocketManager) {
+    public FeedProvider(IConnectionManager connectionManager) {
         EventBus.getDefault().register(this);
 
         mMessagesCache = new ArrayList<>();
-        mWebSocketManager.startListening();
+        this.connectionManager.startListening();
 
-        mWebSocketManager = webSocketManager;
+        this.connectionManager = connectionManager;
     }
 
     @Override
