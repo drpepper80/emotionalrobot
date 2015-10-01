@@ -20,10 +20,10 @@ import java.util.List;
  */
 public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<NodeRedMessage> mDataFeed;
-    private Context mContext;
+    private final List<NodeRedMessage> mDataFeed;
+    private final Context mContext;
 
-    public FeedAdapter(List<NodeRedMessage> dataFeed, Context context) {
+    public FeedAdapter(final List<NodeRedMessage> dataFeed, final Context context) {
         mDataFeed = dataFeed;
         mContext = context;
     }

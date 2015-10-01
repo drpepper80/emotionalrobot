@@ -15,9 +15,9 @@ import com.blindcarboncopy.emotionalrobot.R;
  */
 public class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView title;
-    public TextView payload;
-    public RelativeLayout feedRelativeLayout;
+    public final TextView title;
+    public final TextView payload;
+    public final RelativeLayout feedRelativeLayout;
     public Context context;
     public String url;
 

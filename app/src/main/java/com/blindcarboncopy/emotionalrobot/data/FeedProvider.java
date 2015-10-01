@@ -15,12 +15,12 @@ import de.greenrobot.event.EventBus;
  */
 public class FeedProvider implements IFeedProvider {
 
-    private List<NodeRedMessage> mMessagesCache;
-    private IConnectionManager connectionManager;
+    private final List<NodeRedMessage> mMessagesCache;
+    private final IConnectionManager connectionManager;
 
     private final Object syncLock = new Object();
 
-    public FeedProvider(IConnectionManager connectionManager) {
+    public FeedProvider(final IConnectionManager connectionManager) {
         EventBus.getDefault().register(this);
 
         mMessagesCache = new ArrayList<>();
@@ -30,7 +30,7 @@ public class FeedProvider implements IFeedProvider {
     }
 
     @Override
-    public List<NodeRedMessage> getMessages(boolean showOnlyHappy) {
+    public List<NodeRedMessage> getMessages(final boolean showOnlyHappy) {
         synchronized (syncLock) {
             if (showOnlyHappy) {
                 return filterMessages(mMessagesCache);
@@ -42,9 +42,9 @@ public class FeedProvider implements IFeedProvider {
 
     /**
      * Event handler for when a new NodeRedMessage is received from the server.
-     *
-     * @param messageEvent The received message event.
-     */
+            *
+            * @param messageEvent The received message event.
+    */
     public void onEvent(final NodeRedMessageEvent messageEvent) {
         synchronized (syncLock) {
             mMessagesCache.add(messageEvent.message);
@@ -59,7 +59,7 @@ public class FeedProvider implements IFeedProvider {
      * @param messages The list of messages to be filtered.
      * @return The filtered message list.
      */
-    private List<NodeRedMessage> filterMessages(List<NodeRedMessage> messages) {
+    private List<NodeRedMessage> filterMessages(final List<NodeRedMessage> messages) {
         List<NodeRedMessage> happyMessages = new ArrayList<>();
 
         for (NodeRedMessage message : messages) {

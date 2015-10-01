@@ -68,11 +68,11 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
         refreshFeed(isChecked);
     }
 
-    public void onEvent(FeedUpdatedEvent feedUpdatedEvent) {
+    public void onEvent(final FeedUpdatedEvent feedUpdatedEvent) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
