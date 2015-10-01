@@ -2,53 +2,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/i_am_feeling_label"
-        android:text="@string/i_am_feeling_label"
-        android:textStyle="bold|italic"
-        android:textSize="8pt"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/mood_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
-    <Switch
-        android:id="@+id/mood_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_below="@id/i_am_feeling_label"
-        android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/i_am_feeling_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="16dp"
+            android:text="@string/i_am_feeling_label"
+            android:textSize="8pt"
+            android:textStyle="bold|italic" />
 
-    <TextView
-        android:id="@+id/all_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_below="@id/i_am_feeling_label"
-        android:layout_toStartOf="@id/mood_switch"
-        android:drawableEnd="@drawable/happy" />
+        <Switch
+            android:id="@+id/mood_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/i_am_feeling_label"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin" />
 
-    <TextView
-        android:id="@+id/happy_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_below="@id/i_am_feeling_label"
-        android:layout_toEndOf="@id/mood_switch"
-        android:drawableStart="@drawable/sad" />
+        <TextView
+            android:id="@+id/all_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/i_am_feeling_label"
+            android:layout_marginEnd="16dp"
+            android:layout_toStartOf="@id/mood_switch"
+            android:drawableEnd="@drawable/happy" />
+
+        <TextView
+            android:id="@+id/happy_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/i_am_feeling_label"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/mood_switch"
+            android:drawableStart="@drawable/sad" />
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/feed"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/mood_switch"
+        android:layout_below="@id/mood_bar"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
         android:scrollbars="vertical" />
 
 </RelativeLayout>
