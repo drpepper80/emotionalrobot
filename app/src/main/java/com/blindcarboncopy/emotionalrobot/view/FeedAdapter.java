@@ -39,26 +39,26 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         NodeRedMessage message = mDataFeed.get(i);
-
         FeedViewHolder feedViewHolder = (FeedViewHolder) viewHolder;
+        int sentimentScore = Math.round(message.getSentiment().getScore());
         feedViewHolder.context = mContext;
         feedViewHolder.title.setText(message.getArticle().getTitle());
         feedViewHolder.payload.setText(StringUtils.abbreviate(message.getPayload(), 120));
         feedViewHolder.url = message.getArticle().getLink();
 
         // A neutral message
-        if (Math.round(message.getSentiment().getScore()) == 0) {
-            Log.d("SENTIMENT", message.get_msgid() + " This is a neutral message, it has a score of " + message.getSentiment().getScore());
+        if (sentimentScore == 0) {
+            Log.d("SENTIMENT", message.get_msgid() + " This is a neutral message, it has a score of " + sentimentScore);
             feedViewHolder.cardView.setCardBackgroundColor(Color.parseColor("#808080"));
         }
         // A happy Message
-        else if (Math.round(message.getSentiment().getScore()) > 0) {
-            Log.d("SENTIMENT", message.get_msgid() + " This is a happy message, it has a score of " + message.getSentiment().getScore());
+        else if (sentimentScore > 0) {
+            Log.d("SENTIMENT", message.get_msgid() + " This is a happy message, it has a score of " + sentimentScore);
             feedViewHolder.cardView.setCardBackgroundColor(Color.parseColor("#FFC0CB"));
         }
         // A sad Message
         else {
-            Log.d("SENTIMENT", message.get_msgid() + " This is a sad message, it has a score of " + message.getSentiment().getScore());
+            Log.d("SENTIMENT", message.get_msgid() + " This is a sad message, it has a score of " + sentimentScore);
             feedViewHolder.cardView.setCardBackgroundColor(Color.parseColor("#4f4fb6"));
         }
     }
