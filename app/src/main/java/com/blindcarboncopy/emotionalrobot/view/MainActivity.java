@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         mRecyclerView = (RecyclerView) findViewById(R.id.feed);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.setHasFixedSize(true);
 
         initialiseFeed();

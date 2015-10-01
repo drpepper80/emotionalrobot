@@ -31,7 +31,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.feed_row_view, parent, false);
+                .inflate(R.layout.feed_card_view, parent, false);
 
         return new FeedViewHolder(view);
     }
@@ -47,25 +47,20 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         feedViewHolder.url = message.getArticle().getLink();
 
         // A neutral message
-        if (Math.round(message.getSentiment().getScore()) == 0)
-        {
-            Log.d("SENTIMENT",message.get_msgid() + " This is a neutral message, it has a score of " + message.getSentiment().getScore());
-            feedViewHolder.feedRelativeLayout.setBackgroundColor(Color.parseColor("#808080"));
+        if (Math.round(message.getSentiment().getScore()) == 0) {
+            Log.d("SENTIMENT", message.get_msgid() + " This is a neutral message, it has a score of " + message.getSentiment().getScore());
+            feedViewHolder.cardView.setCardBackgroundColor(Color.parseColor("#808080"));
         }
         // A happy Message
-        else if (Math.round(message.getSentiment().getScore()) > 0)
-        {
-            Log.d("SENTIMENT",message.get_msgid() + " This is a happy message, it has a score of " + message.getSentiment().getScore());
-            feedViewHolder.feedRelativeLayout.setBackgroundColor(Color.parseColor("#FFC0CB"));
+        else if (Math.round(message.getSentiment().getScore()) > 0) {
+            Log.d("SENTIMENT", message.get_msgid() + " This is a happy message, it has a score of " + message.getSentiment().getScore());
+            feedViewHolder.cardView.setCardBackgroundColor(Color.parseColor("#FFC0CB"));
         }
         // A sad Message
-        else
-        {
-            Log.d("SENTIMENT",message.get_msgid() + " This is a sad message, it has a score of " + message.getSentiment().getScore());
-            feedViewHolder.feedRelativeLayout.setBackgroundColor(Color.parseColor("#4f4fb6"));
+        else {
+            Log.d("SENTIMENT", message.get_msgid() + " This is a sad message, it has a score of " + message.getSentiment().getScore());
+            feedViewHolder.cardView.setCardBackgroundColor(Color.parseColor("#4f4fb6"));
         }
-
-
     }
 
     @Override
