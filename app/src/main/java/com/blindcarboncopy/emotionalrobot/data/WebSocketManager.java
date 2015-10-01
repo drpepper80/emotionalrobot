@@ -75,6 +75,9 @@ public class WebSocketManager implements IConnectionManager {
         EventBus.getDefault().post(new NodeRedMessageEvent(message));
     }
 
+    /**
+     * Resets the current connection.
+     */
     private void resetConnection() {
         startListening();
     }
