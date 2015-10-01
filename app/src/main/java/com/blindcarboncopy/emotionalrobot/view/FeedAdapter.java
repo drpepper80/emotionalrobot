@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.blindcarboncopy.emotionalrobot.R;
-import com.blindcarboncopy.emotionalrobot.model.NodeRedMessage;
+import com.blindcarboncopy.emotionalrobot.model.nodered.NodeRedMessage;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -49,17 +49,17 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         // A neutral message
         if (sentimentScore == 0) {
             Log.d("SENTIMENT", message.get_msgid() + " This is a neutral message, it has a score of " + sentimentScore);
-            feedViewHolder.cardView.setCardBackgroundColor(Color.parseColor("#808080"));
+            feedViewHolder.cardView.setCardBackgroundColor(R.color.neutral_message);
         }
         // A happy Message
         else if (sentimentScore > 0) {
             Log.d("SENTIMENT", message.get_msgid() + " This is a happy message, it has a score of " + sentimentScore);
-            feedViewHolder.cardView.setCardBackgroundColor(Color.parseColor("#FFC0CB"));
+            feedViewHolder.cardView.setCardBackgroundColor(R.color.happy_message);
         }
         // A sad Message
         else {
             Log.d("SENTIMENT", message.get_msgid() + " This is a sad message, it has a score of " + sentimentScore);
-            feedViewHolder.cardView.setCardBackgroundColor(Color.parseColor("#4f4fb6"));
+            feedViewHolder.cardView.setCardBackgroundColor(R.color.sad_message);
         }
     }
 

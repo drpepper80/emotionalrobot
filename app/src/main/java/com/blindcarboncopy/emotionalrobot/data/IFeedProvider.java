@@ -1,6 +1,6 @@
 package com.blindcarboncopy.emotionalrobot.data;
 
-import com.blindcarboncopy.emotionalrobot.model.NodeRedMessage;
+import com.blindcarboncopy.emotionalrobot.model.nodered.NodeRedMessage;
 
 import java.util.List;
 

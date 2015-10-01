@@ -1,4 +1,4 @@
-package com.blindcarboncopy.emotionalrobot.model.messagecomponent;
+package com.blindcarboncopy.emotionalrobot.model.nodered.messagecomponent;
 
 /**
  * A Model to represent the Article Metadata Image message component

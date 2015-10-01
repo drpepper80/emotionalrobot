@@ -3,7 +3,7 @@ package com.blindcarboncopy.emotionalrobot.data;
 import android.os.AsyncTask;
 
 import com.blindcarboncopy.emotionalrobot.event.NodeRedMessageEvent;
-import com.blindcarboncopy.emotionalrobot.model.NodeRedMessage;
+import com.blindcarboncopy.emotionalrobot.model.nodered.NodeRedMessage;
 import com.google.gson.Gson;
 import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
@@ -23,13 +23,13 @@ public class WebSocketManager implements IConnectionManager {
     private WebSocket mWebSocket;
 
     @Override
-    public void startListening() {
-        stopListening();
+    public void attachToInterface() {
+        detachFromInterface();
         startListening("ws://emo-node.eu-gb.mybluemix.net/ws/all");
     }
 
     @Override
-    public void stopListening() {
+    public void detachFromInterface() {
         if (mWebSocket != null && mWebSocket.isOpen()) {
             mWebSocket.disconnect();
         }
@@ -39,7 +39,7 @@ public class WebSocketManager implements IConnectionManager {
      * Starts listening for messages on a remote web socket.
      */
     private void startListening(final String feedUrl) {
-        stopListening();
+        detachFromInterface();
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -79,6 +79,6 @@ public class WebSocketManager implements IConnectionManager {
      * Resets the current connection.
      */
     private void resetConnection() {
-        startListening();
+        attachToInterface();
     }
 }

@@ -1,6 +1,6 @@
-package com.blindcarboncopy.emotionalrobot.model.messagecomponent;
+package com.blindcarboncopy.emotionalrobot.model.nodered.messagecomponent;
 
-import com.blindcarboncopy.emotionalrobot.model.interfaces.NodeRedMessageComponent;
+import com.blindcarboncopy.emotionalrobot.model.nodered.interfaces.NodeRedMessageComponent;
 
 /**
  * A Model to represent the Article Metadata message component

@@ -32,4 +32,5 @@ dependencies {
     compile 'com.neovisionaries:nv-websocket-client:1.10'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'org.apache.commons:commons-lang3:3.0'
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
 }

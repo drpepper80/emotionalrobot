@@ -1,6 +1,6 @@
 package com.blindcarboncopy.emotionalrobot.event;
 
-import com.blindcarboncopy.emotionalrobot.model.NodeRedMessage;
+import com.blindcarboncopy.emotionalrobot.model.nodered.NodeRedMessage;
 
 /**
  * Event containing a new incoming message from NodeRed.

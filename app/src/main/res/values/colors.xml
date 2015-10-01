@@ -4,4 +4,7 @@
     <color name="primary_material_dark">#9c27b0</color>
     <color name="primary_dark_material_dark">#7b1fa2</color>
     <color name="accent_material_light">#ea80fc</color>
+    <color name="happy_message">#ea80fc</color>
+    <color name="neutral_message">#ececec</color>
+    <color name="sad_message">#80d5fc</color>
 </resources>

@@ -1,8 +1,8 @@
-package com.blindcarboncopy.emotionalrobot.model;
+package com.blindcarboncopy.emotionalrobot.model.nodered;
 
 
-import com.blindcarboncopy.emotionalrobot.model.messagecomponent.NodeRedArticle;
-import com.blindcarboncopy.emotionalrobot.model.messagecomponent.NodeRedSentiment;
+import com.blindcarboncopy.emotionalrobot.model.nodered.messagecomponent.NodeRedArticle;
+import com.blindcarboncopy.emotionalrobot.model.nodered.messagecomponent.NodeRedSentiment;
 
 /**
  * A data model for the Node Red Message object

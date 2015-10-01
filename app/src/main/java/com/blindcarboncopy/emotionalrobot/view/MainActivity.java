@@ -14,7 +14,7 @@ import com.blindcarboncopy.emotionalrobot.data.FeedProvider;
 import com.blindcarboncopy.emotionalrobot.data.IFeedProvider;
 import com.blindcarboncopy.emotionalrobot.data.WebSocketManager;
 import com.blindcarboncopy.emotionalrobot.event.FeedUpdatedEvent;
-import com.blindcarboncopy.emotionalrobot.model.NodeRedMessage;
+import com.blindcarboncopy.emotionalrobot.model.nodered.NodeRedMessage;
 
 import java.util.ArrayList;
 import java.util.List;

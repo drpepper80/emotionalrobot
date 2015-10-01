@@ -2,7 +2,7 @@ package com.blindcarboncopy.emotionalrobot.data;
 
 import com.blindcarboncopy.emotionalrobot.event.FeedUpdatedEvent;
 import com.blindcarboncopy.emotionalrobot.event.NodeRedMessageEvent;
-import com.blindcarboncopy.emotionalrobot.model.NodeRedMessage;
+import com.blindcarboncopy.emotionalrobot.model.nodered.NodeRedMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class FeedProvider implements IFeedProvider {
         mMessagesCache = new ArrayList<>();
         this.connectionManager = connectionManager;
 
-        this.connectionManager.startListening();
+        this.connectionManager.attachToInterface();
     }
 
     @Override
