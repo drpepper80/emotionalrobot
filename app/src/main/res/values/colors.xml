@@ -6,5 +6,5 @@
     <color name="accent_material_light">#ea80fc</color>
     <color name="happy_message">#ea80fc</color>
     <color name="neutral_message">#ececec</color>
-    <color name="sad_message">#80d5fc</color>
+    <color name="sad_message">#80abfc</color>
 </resources>

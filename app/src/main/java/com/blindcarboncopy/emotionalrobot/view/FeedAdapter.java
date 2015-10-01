@@ -2,6 +2,7 @@ package com.blindcarboncopy.emotionalrobot.view;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
@@ -50,17 +51,17 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         // A neutral message
         if (sentimentScore == 0) {
             Log.d("SENTIMENT", message.get_msgid() + " This is a neutral message, it has a score of " + sentimentScore);
-            feedViewHolder.cardView.setCardBackgroundColor(R.color.neutral_message);
+            feedViewHolder.cardView.setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.neutral_message));
         }
         // A happy Message
         else if (sentimentScore > 0) {
             Log.d("SENTIMENT", message.get_msgid() + " This is a happy message, it has a score of " + sentimentScore);
-            feedViewHolder.cardView.setCardBackgroundColor(R.color.happy_message);
+            feedViewHolder.cardView.setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.happy_message));
         }
         // A sad Message
         else {
             Log.d("SENTIMENT", message.get_msgid() + " This is a sad message, it has a score of " + sentimentScore);
-            feedViewHolder.cardView.setCardBackgroundColor(R.color.sad_message);
+            feedViewHolder.cardView.setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.sad_message));
         }
     }
 
