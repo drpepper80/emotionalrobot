@@ -20,12 +20,13 @@ public class FeedProvider implements IFeedProvider {
 
     private final Object syncLock = new Object();
 
-    public FeedProvider() {
+    public FeedProvider(IWebSocketManager webSocketManager) {
         EventBus.getDefault().register(this);
 
         mMessagesCache = new ArrayList<>();
-        mWebSocketManager = new WebSocketManager();
         mWebSocketManager.startListening();
+
+        mWebSocketManager = webSocketManager;
     }
 
     @Override

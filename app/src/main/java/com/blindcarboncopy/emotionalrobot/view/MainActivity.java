@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.blindcarboncopy.emotionalrobot.R;
 import com.blindcarboncopy.emotionalrobot.data.FeedProvider;
 import com.blindcarboncopy.emotionalrobot.data.IFeedProvider;
+import com.blindcarboncopy.emotionalrobot.data.WebSocketManager;
 import com.blindcarboncopy.emotionalrobot.event.FeedUpdatedEvent;
 import com.blindcarboncopy.emotionalrobot.model.NodeRedMessage;
 
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     private TextView mAllIcon;
     private TextView mHappyIcon;
     private Switch mMoodSwitch;
-    private IFeedProvider mFeedProvider = new FeedProvider();
+    private IFeedProvider mFeedProvider = new FeedProvider(new WebSocketManager());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
