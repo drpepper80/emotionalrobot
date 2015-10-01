@@ -24,9 +24,9 @@ public class FeedProvider implements IFeedProvider {
         EventBus.getDefault().register(this);
 
         mMessagesCache = new ArrayList<>();
-        this.connectionManager.startListening();
-
         this.connectionManager = connectionManager;
+
+        this.connectionManager.startListening();
     }
 
     @Override
