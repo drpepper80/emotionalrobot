@@ -1,7 +1,7 @@
 package com.blindcarboncopy.emotionalrobot.model.nodered.interfaces;
 
 /**
- * Created by chris on 30/09/2015.
+ * Defines common behaviour for all NodeRedMessage components.
  */
 public interface NodeRedMessageComponent {
 }

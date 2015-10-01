@@ -25,12 +25,12 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private List<NodeRedMessage> mDataFeed = new ArrayList<>();
+    private final List<NodeRedMessage> mDataFeed = new ArrayList<>();
 
     private TextView mAllIcon;
     private TextView mHappyIcon;
     private Switch mMoodSwitch;
-    private IFeedProvider mFeedProvider = new FeedProvider(new WebSocketManager());
+    private final IFeedProvider mFeedProvider = new FeedProvider(new WebSocketManager());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     /**
      * Does the initial setup of the feed and populates it.
      */
-    void initialiseFeed() {
+    private void initialiseFeed() {
         mAdapter = new FeedAdapter(mDataFeed, this);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
      *
      * @param showOnlyHappy If true, only feed data considered to be "happy" will be returned.
      */
-    void refreshFeed(final boolean showOnlyHappy) {
+    private void refreshFeed(final boolean showOnlyHappy) {
         mDataFeed.clear();
         mDataFeed.addAll(mFeedProvider.getMessages(showOnlyHappy));
 

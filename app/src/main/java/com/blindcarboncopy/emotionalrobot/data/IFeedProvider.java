@@ -14,5 +14,5 @@ public interface IFeedProvider {
      * @param showOnlyHappy If true, only happy messages are included in the returned message list.
      * @return A list of messages.
      */
-    public List<NodeRedMessage> getMessages(boolean showOnlyHappy);
+    List<NodeRedMessage> getMessages(boolean showOnlyHappy);
 }

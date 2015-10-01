@@ -13,5 +13,5 @@ public class NodeRedMessageEvent {
     /**
      * The message from NodeRed.
      */
-    public NodeRedMessage message;
+    public final NodeRedMessage message;
 }

@@ -1,7 +1,6 @@
 package com.blindcarboncopy.emotionalrobot.view;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -18,9 +17,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 
 /**
- * RecylerView adapter for the RSS data feed.
+ * RecyclerView adapter for the RSS data feed.
  */
-public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final List<NodeRedMessage> mDataFeed;
     private final Context mContext;

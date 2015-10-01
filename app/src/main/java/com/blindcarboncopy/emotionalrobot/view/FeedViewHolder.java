@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blindcarboncopy.emotionalrobot.R;
@@ -14,7 +13,7 @@ import com.blindcarboncopy.emotionalrobot.R;
 /**
  * ViewHolder for rows in the News Feed.
  */
-public class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public final TextView title;
     public final TextView payload;
@@ -32,7 +31,7 @@ public class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        // TODO: This shouldnt live here! Fix it.
+        // TODO: This shouldn't live here! Fix it.
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         context.startActivity(i);

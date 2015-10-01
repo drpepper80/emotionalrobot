@@ -25,7 +25,7 @@ public class WebSocketManager implements IConnectionManager {
     @Override
     public void attachToInterface() {
         detachFromInterface();
-        startListening("ws://emo-node.eu-gb.mybluemix.net/ws/all");
+        startListening();
     }
 
     @Override
@@ -38,14 +38,14 @@ public class WebSocketManager implements IConnectionManager {
     /**
      * Starts listening for messages on a remote web socket.
      */
-    private void startListening(final String feedUrl) {
+    private void startListening() {
         detachFromInterface();
 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    mWebSocket = new WebSocketFactory().createSocket(feedUrl);
+                    mWebSocket = new WebSocketFactory().createSocket("ws://emo-node.eu-gb.mybluemix.net/ws/all");
                     mWebSocket.addListener(new WebSocketAdapter() {
                         @Override
                         public void onTextMessage(WebSocket websocket, final String text) throws Exception {
